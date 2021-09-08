@@ -1,4 +1,7 @@
 import React from "react";
+import {Button, Modal} from 'react-bootstrap';
+import AddDataModal from 'components/AddDataModal';
+
 import './style.scss';
 import {
     IUserData,
@@ -47,7 +50,8 @@ const data: IData[] = [
 ];
 
 function Table(props: ITableProps) {
-    const [state, dispatch] = React.useReducer(reducer, reducerRecord)
+    const [state, dispatch] = React.useReducer(reducer, reducerRecord);
+    const [modalShow, setModalShow] = React.useState(false);
 
 
     React.useEffect(() => {
@@ -122,6 +126,22 @@ function Table(props: ITableProps) {
                     </Form>
                 </Formik>
             </>
+
+
+
+            <Button variant="primary" onClick={() => setModalShow(true)}>
+              Launch vertically centered modal
+            </Button>
+
+            <AddDataModal
+              openState={modalShow}
+              setOpenState={setModalShow}
+            />
+
+
+
+
+
         </>
     )
 }
