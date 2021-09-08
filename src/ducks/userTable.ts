@@ -71,3 +71,17 @@ export const setUserData: MyActionCreator = (dispatcher, userData: IUserData, st
     })
 }
 
+export const correctUserData: MyActionCreator = (dispatcher, {userData, index} : {userData: IUserData, index: number}, state) => {
+    const prevUsersData = state && state.tableData;
+    const updatedUsersData = prevUsersData && [...prevUsersData.map((user, i) => {
+      if (i === index) {
+        return {...user, userData};
+      }
+      return user;
+    })];
+    dispatcher({
+        type: SET_NEW_USER_DATA,
+        payload: updatedUsersData,
+    })
+}
+
