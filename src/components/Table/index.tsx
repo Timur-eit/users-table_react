@@ -1,6 +1,8 @@
 import React from "react";
 import {Button, Modal} from 'react-bootstrap';
-import AddDataModal from 'components/AddDataModal';
+import TableDataModal from 'components/TableDataModal';
+
+import { Formik, Field, Form, FormikHelpers } from 'formik';
 
 import './style.scss';
 import {
@@ -10,10 +12,9 @@ import {
     getUsersList,
     deleteUserData,
     setUserData,
+    SET_NEW_USER_DATA,
+    CORRECT_USER_DATA
 } from 'ducks/userTable';
-
-import { Formik, Field, Form, FormikHelpers } from 'formik';
-
 
 interface ITableProps {
     [poperty: string]: any
@@ -21,11 +22,11 @@ interface ITableProps {
 
 const columnNames: string[] = ['Фамилия', 'Имя', 'Отчество', 'E-mail', 'Логин'];
 
-export interface IData {
-    [property: string]: string,
-}
+// export interface IData {
+//     [property: string]: string,
+// }
 
-const data: IData[] = [
+const data: IUserData[] = [
     {
         lastName: 'Иванов',
         firstName: 'Иван',
@@ -50,17 +51,28 @@ const data: IData[] = [
 ];
 
 function Table(props: ITableProps) {
-    const [state, dispatch] = React.useReducer(reducer, reducerRecord);
-    const [modalShow, setModalShow] = React.useState(false);
+
+    const defaultFormValues: IUserData = {
+        lastName: '',
+        firstName: '',
+        midleName: '',
+        email: '',
+        login: '',
+    };   
+
+    const [tableState, dispatch] = React.useReducer(reducer, reducerRecord);
+    const [modalShow, setModalShow] = React.useState<boolean>(false);
+    const [modifyTableState, setModifyTableState] = React.useState<null | string>(null)
+    const [initialFormValues, setInitialFormValues] = React.useState<IUserData>(defaultFormValues)
 
 
     React.useEffect(() => {
-        if (!state.tableData) {
+        if (!tableState.tableData) {
             getUsersList(dispatch, data)
         }
-    }, [state])
+    }, [tableState])
 
-    console.log(state.tableData)
+    // console.log(modifyTableState);
 
 
     return (
@@ -75,7 +87,7 @@ function Table(props: ITableProps) {
                 </thead>
 
                 <tbody>
-                    {state.tableData && state.tableData.map((user, i) => {
+                    {tableState.tableData && tableState.tableData.map((user, i) => {
                         return (
                             <tr key={user.login + i}>
                                 <td>{user.lastName}</td>
@@ -83,27 +95,65 @@ function Table(props: ITableProps) {
                                 <td>{user.midleName}</td>
                                 <td>{user.email}</td>
                                 <td>{user.login}</td>
-                                <td><button onClick={() => deleteUserData(dispatch, i, state)}>DELETE</button></td>
+                                <td><button onClick={
+                                    // () => deleteUserData(dispatch, i, tableState)
+                                    () => {                                        
+                                        setModifyTableState(CORRECT_USER_DATA);
+                                        setInitialFormValues({
+                                            lastName: user.lastName,
+                                            firstName: user.firstName,
+                                            midleName: user.midleName,
+                                            email: user.email,
+                                            login: user.login,
+                                        })
+                                        setModalShow(true);
+                                    }
+                                }>
+                                    CORRECT DATA</button>
+                                </td>
+                                <td><button onClick={() => deleteUserData(dispatch, i, tableState)}>DELETE</button></td>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
 
-            <>
-                <h1>ADD NEW USER</h1>
+            <Button variant="primary" onClick={() => {
+                setModalShow(true)
+                setModifyTableState(SET_NEW_USER_DATA);
+
+            }}>
+              Launch vertically centered modal
+            </Button>
+
+            <TableDataModal
+              openState={modalShow}
+              setOpenState={setModalShow}
+              children={
+                <>
+                <h1>{
+                    (() => {
+                        if (modifyTableState === SET_NEW_USER_DATA) {
+                            return 'ADD USER';
+                        } else if (modifyTableState === CORRECT_USER_DATA) {
+                            return 'CORRECT USER';
+                        } else {
+                            return '';
+                        }
+                    })()
+                }</h1>
                 <Formik
-                    initialValues={{
-                        lastName: '',
-                        firstName: '',
-                        midleName: '',
-                        email: '',
-                        login: '',
-                    }}
-                    onSubmit={(values: IUserData, {setSubmitting}: FormikHelpers<IUserData>) => {
-                        setUserData(dispatch, values, state);
-                        console.log(values);
+                    initialValues={initialFormValues}
+                    onSubmit={(values: IUserData, {setSubmitting, resetForm }: FormikHelpers<IUserData>) => {
+                        if (modifyTableState === SET_NEW_USER_DATA) {
+                            setUserData(dispatch, values, tableState);
+                        } else {
+                            console.log(values);
+                        }
+                        setModalShow(false);
                         setSubmitting(false)
+                        resetForm();
+                        setModifyTableState(null);
                     }}
                 >
                     <Form>
@@ -127,15 +177,7 @@ function Table(props: ITableProps) {
                 </Formik>
             </>
 
-
-
-            <Button variant="primary" onClick={() => setModalShow(true)}>
-              Launch vertically centered modal
-            </Button>
-
-            <AddDataModal
-              openState={modalShow}
-              setOpenState={setModalShow}
+              }
             />
 
 

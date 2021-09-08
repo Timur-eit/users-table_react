@@ -24,7 +24,8 @@ function ModalWindow(props: IModalWindowProps) {
     setOpenState,
     // additionalStateHandler,
     // acceptAction,
-    // declineAction,   
+    // declineAction,
+    children
   } = props;
 
   // const [show, setShow] = useState(false);
@@ -67,18 +68,19 @@ function ModalWindow(props: IModalWindowProps) {
         // onHide={onHide ? () => handleClose() : null}
         centered
       >
-        <Modal.Title>{modalData && modalData.title}</Modal.Title>
-        <Modal.Body>
-          <div className="modal-title-block">
-            
+        <div className="modal-title-block">
+          <Modal.Title>{modalData && modalData.title}</Modal.Title>    
             {declineButton && (
               <div
                 // onClick={() => declineHanlder()}
                 className={"decline-btn"}
               ></div>
             )}
-          </div>
-          {modalData && modalData.content}
+          </div>        
+        <Modal.Body>
+          
+          {/* {modalData && modalData.content} */}
+          {children}
           <Button variant="primary" onClick={handleClose}>
             {modalData && modalData.closeButtonLabel}
           </Button>
