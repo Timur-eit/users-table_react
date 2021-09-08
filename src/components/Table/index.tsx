@@ -1,11 +1,15 @@
 import React from "react";
 import './style.scss';
-import { 
+import {
+    IUserData,
     reducer,
     reducerRecord,
     getUsersList,
     deleteUserData,
+    setUserData,
 } from 'ducks/userTable';
+
+import { Formik, Field, Form, FormikHelpers } from 'formik';
 
 
 interface ITableProps {
@@ -45,7 +49,7 @@ const data: IData[] = [
 function Table(props: ITableProps) {
     const [state, dispatch] = React.useReducer(reducer, reducerRecord)
 
-    
+
     React.useEffect(() => {
         if (!state.tableData) {
             getUsersList(dispatch, data)
@@ -69,7 +73,7 @@ function Table(props: ITableProps) {
                 <tbody>
                     {state.tableData && state.tableData.map((user, i) => {
                         return (
-                            <tr key={user.login}>
+                            <tr key={user.login + i}>
                                 <td>{user.lastName}</td>
                                 <td>{user.firstName}</td>
                                 <td>{user.midleName}</td>
@@ -82,7 +86,42 @@ function Table(props: ITableProps) {
                 </tbody>
             </table>
 
-            {/* <button onClick={() => getInitialUserList(data)}>Get Data</button> */}
+            <>
+                <h1>ADD NEW USER</h1>
+                <Formik
+                    initialValues={{
+                        lastName: '',
+                        firstName: '',
+                        midleName: '',
+                        email: '',
+                        login: '',
+                    }}
+                    onSubmit={(values: IUserData, {setSubmitting}: FormikHelpers<IUserData>) => {
+                        setUserData(dispatch, values, state);
+                        console.log(values);
+                        setSubmitting(false)
+                    }}
+                >
+                    <Form>
+                        <label htmlFor="lastName">Фамилия</label>
+                        <Field id="lastName" name="lastName" placeholder="pass lastName" required/>
+
+                        <label htmlFor="firstName">Имя</label>
+                        <Field id="firstName" name="firstName" placeholder="pass firstName" required/>
+
+                        <label htmlFor="midleName">Отчество</label>
+                        <Field id="midleName" name="midleName" placeholder="pass midleName" required/>
+
+                        <label htmlFor="email">E-mail</label>
+                        <Field id="email" name="email" placeholder="pass email" required/>
+
+                        <label htmlFor="login">Логин</label>
+                        <Field id="login" name="login" placeholder="pass login" required/>
+
+                        <button type="submit">Submit</button>
+                    </Form>
+                </Formik>
+            </>
         </>
     )
 }

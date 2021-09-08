@@ -3,13 +3,14 @@ import {IData} from 'components/Table';
 
 const GET_USERS_DATA = 'GET_USERS_DATA';
 const DELETE_USER_DATA = 'DELETE_USER_DATA';
+const SET_NEW_USER_DATA = 'SET_NEW_USER_DATA';
 
-interface IUserData {
+export interface IUserData {
     lastName: string,
     firstName: string,
     midleName: string,
     email: string,
-    login: string,    
+    login: string,
 }
 
 interface IReducerRecord {
@@ -28,6 +29,11 @@ export const reducer: React.Reducer<IReducerRecord, React.ReducerAction<any>> = 
         tableData: action.payload,
         }
     case DELETE_USER_DATA:
+      return {
+        ...state,
+        tableData: action.payload,
+        }
+    case SET_NEW_USER_DATA:
       return {
         ...state,
         tableData: action.payload,
@@ -51,6 +57,15 @@ export const deleteUserData: MyActionCreator = (dispatcher, userIndex: number, s
     const updatedUsersData = prevUsersData && [...prevUsersData].filter((_, i) => i !== userIndex);
     dispatcher({
         type: DELETE_USER_DATA,
+        payload: updatedUsersData,
+    })
+}
+
+export const setUserData: MyActionCreator = (dispatcher, userData: IData, state) => {
+    const prevUsersData = state && state.tableData;
+    const updatedUsersData = prevUsersData && [...prevUsersData, userData];
+    dispatcher({
+        type: SET_NEW_USER_DATA,
         payload: updatedUsersData,
     })
 }
