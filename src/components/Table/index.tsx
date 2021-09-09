@@ -8,6 +8,8 @@ import UserDeleteModal from 'components/DeleteUserModal';
 import HandleDataModal from 'shared/ui/Modal/HandleDataModal'
 // import ConfirmationModal from 'shared/ui/Modal/ConfirmationModal';
 
+import validate from 'components/Table/validation/validation'
+
 import {
     IUserData,
     usersTableAction,
@@ -41,6 +43,7 @@ function UsersTable(props: IUsersTableProps) {
     const [modifyTableState, setModifyTableState] = React.useState<null | string>(null);
     const [initialFormValues, setInitialFormValues] = React.useState<IUserData>(defaultFormValues);
     const [userIndex, setUserIndex] = React.useState<null | number>(null);
+    const [submitAvailable, setSubmitAvailable] = React.useState<boolean>(false);
 
     function correctData(obj: IUserData, index: number): void {
         setModifyTableState(CORRECT_USER_DATA);
@@ -156,6 +159,7 @@ function UsersTable(props: IUsersTableProps) {
                             resetForm();
                             setModifyTableState(null);
                         }}
+                        validate={(values) => validate(values, setSubmitAvailable)}
                     >
                         <Form>
                             <label htmlFor="lastName">Фамилия</label>
@@ -167,8 +171,8 @@ function UsersTable(props: IUsersTableProps) {
                             <label htmlFor="email">E-mail</label>
                             <Field id="email" name="email" placeholder="pass email" required/>
                             <label htmlFor="login">Логин</label>
-                            <Field id="login" name="login" placeholder="pass login" required/>
-                            <Button type="submit">{getDataModalLabels().confirmButton}</Button>
+                            <Field id="login" name="login" placeholder="pass login" required/>                            
+                            <Button disabled={!submitAvailable} type="submit">{getDataModalLabels().confirmButton}</Button>
                         </Form>
                     </Formik>
                 </>}

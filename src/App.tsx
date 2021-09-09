@@ -5,7 +5,7 @@ import {columnNames, defaultFormValues, initialTableData} from 'data/initialTabl
 function App() {
   return (
       <UsersTable
-        columns={columnNames}
+        columns={Object.values(columnNames)}
         initialTableData={initialTableData}
         defaultFormValues={defaultFormValues}
       />
