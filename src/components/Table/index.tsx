@@ -12,6 +12,7 @@ import {
     getUsersList,
     deleteUserData,
     setUserData,
+    correctUserData,
     SET_NEW_USER_DATA,
     CORRECT_USER_DATA
 } from 'ducks/userTable';
@@ -58,17 +59,18 @@ function Table(props: ITableProps) {
         midleName: '',
         email: '',
         login: '',
-    };   
+    };
 
     const [tableState, dispatch] = React.useReducer(reducer, reducerRecord);
     const [modalShow, setModalShow] = React.useState<boolean>(false);
     const [modifyTableState, setModifyTableState] = React.useState<null | string>(null)
     const [initialFormValues, setInitialFormValues] = React.useState<IUserData>(defaultFormValues)
+    const [userIndex, setUserIndex] = React.useState<null | number>(null);
 
 
     React.useEffect(() => {
         if (!tableState.tableData) {
-            getUsersList(dispatch, data)
+            getUsersList(dispatch, tableState, data)
         }
     }, [tableState])
 
@@ -97,7 +99,7 @@ function Table(props: ITableProps) {
                                 <td>{user.login}</td>
                                 <td><button onClick={
                                     // () => deleteUserData(dispatch, i, tableState)
-                                    () => {                                        
+                                    () => {
                                         setModifyTableState(CORRECT_USER_DATA);
                                         setInitialFormValues({
                                             lastName: user.lastName,
@@ -107,11 +109,12 @@ function Table(props: ITableProps) {
                                             login: user.login,
                                         })
                                         setModalShow(true);
+                                        setUserIndex(i);
                                     }
                                 }>
                                     CORRECT DATA</button>
                                 </td>
-                                <td><button onClick={() => deleteUserData(dispatch, i, tableState)}>DELETE</button></td>
+                                <td><button onClick={() => deleteUserData(dispatch, tableState, i)}>DELETE</button></td>
                             </tr>
                         )
                     })}
@@ -146,9 +149,10 @@ function Table(props: ITableProps) {
                     initialValues={initialFormValues}
                     onSubmit={(values: IUserData, {setSubmitting, resetForm }: FormikHelpers<IUserData>) => {
                         if (modifyTableState === SET_NEW_USER_DATA) {
-                            setUserData(dispatch, values, tableState);
-                        } else {
-                            console.log(values);
+                            setUserData(dispatch, tableState, values);
+                        } else {                            
+                            correctUserData(dispatch, tableState, values, userIndex);
+                            setInitialFormValues(defaultFormValues);
                         }
                         setModalShow(false);
                         setSubmitting(false)

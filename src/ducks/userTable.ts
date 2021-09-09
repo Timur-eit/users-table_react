@@ -44,16 +44,16 @@ export const reducer: React.Reducer<IReducerRecord, React.ReducerAction<any>> = 
   }
 };
 
-type MyActionCreator = (dispatcher: (action: any) => void, params?: any, state?: IReducerRecord) => void;
+type MyActionCreator = (dispatcher: (action: any) => void, state: IReducerRecord, ...params: any) => void;
 
-export const getUsersList: MyActionCreator = (dispatcher, usersList: IUserData[]) => {
+export const getUsersList: MyActionCreator = (dispatcher, _state, usersList: IUserData[]) => {
     dispatcher({
         type: GET_USERS_DATA,
         payload: usersList,
     })
 }
 
-export const deleteUserData: MyActionCreator = (dispatcher, userIndex: number, state) => {
+export const deleteUserData: MyActionCreator = (dispatcher, state, userIndex: number) => {
     const prevUsersData = state && state.tableData;
     const updatedUsersData = prevUsersData && [...prevUsersData].filter((_, i) => i !== userIndex);
     dispatcher({
@@ -62,7 +62,7 @@ export const deleteUserData: MyActionCreator = (dispatcher, userIndex: number, s
     })
 }
 
-export const setUserData: MyActionCreator = (dispatcher, userData: IUserData, state) => {
+export const setUserData: MyActionCreator = (dispatcher, state, userData: IUserData) => {
     const prevUsersData = state && state.tableData;
     const updatedUsersData = prevUsersData && [...prevUsersData, userData];
     dispatcher({
@@ -71,14 +71,22 @@ export const setUserData: MyActionCreator = (dispatcher, userData: IUserData, st
     })
 }
 
-export const correctUserData: MyActionCreator = (dispatcher, {userData, index} : {userData: IUserData, index: number}, state) => {
-    const prevUsersData = state && state.tableData;
-    const updatedUsersData = prevUsersData && [...prevUsersData.map((user, i) => {
-      if (i === index) {
-        return {...user, userData};
+export const correctUserData: MyActionCreator = (dispatcher, state, userData: IUserData, index: number) => {
+    
+  // console.log(userData);
+  // console.log(index);
+  
+  const prevUsersData = state && state.tableData;
+    const updatedUsersData = prevUsersData && [...prevUsersData.map((user, i) => {      
+      if (i === index) {        
+        return {...user, ...userData};
       }
       return user;
     })];
+
+    // console.log(updatedUsersData);
+
+
     dispatcher({
         type: SET_NEW_USER_DATA,
         payload: updatedUsersData,
