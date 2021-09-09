@@ -3,7 +3,10 @@ import { Formik, Field, Form, FormikHelpers } from 'formik';
 
 import './style.scss';
 import {Button} from 'react-bootstrap';
-import UserDataModal from 'components/TableDataModal';
+import UserDeleteModal from 'components/DeleteUserModal';
+
+import HandleDataModal from 'shared/ui/Modal/HandleDataModal'
+// import ConfirmationModal from 'shared/ui/Modal/ConfirmationModal';
 
 import {
     IUserData,
@@ -34,6 +37,7 @@ function UsersTable(props: IUsersTableProps) {
 
     const [tableState, dispatch] = React.useReducer<React.Reducer<IReducerRecord, usersTableAction>>(reducer, reducerRecord);
     const [tableDataModalShow, setTableDataModalShow] = React.useState<boolean>(false);
+    const [deleteDataModalShow, setDeleteDataModalShow] = React.useState<boolean>(false);
     const [modifyTableState, setModifyTableState] = React.useState<null | string>(null);
     const [initialFormValues, setInitialFormValues] = React.useState<IUserData>(defaultFormValues);
     const [userIndex, setUserIndex] = React.useState<null | number>(null);
@@ -43,6 +47,16 @@ function UsersTable(props: IUsersTableProps) {
         setInitialFormValues(obj)
         setTableDataModalShow(true);
         setUserIndex(index);
+    }
+
+    function prepareToDeleteUserData(userIndex: number): void {
+        setUserIndex(userIndex);
+        setDeleteDataModalShow(true);
+    }
+
+    function deleteUser(): void {
+        deleteUserData(dispatch, tableState, userIndex);
+        setUserIndex(null);
     }
 
     interface ILabels {
@@ -105,7 +119,7 @@ function UsersTable(props: IUsersTableProps) {
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={() => deleteUserData(dispatch, tableState, i)}>
+                                    <button onClick={() => prepareToDeleteUserData(i)}>
                                         DELETE
                                     </button>
                                 </td>
@@ -115,12 +129,18 @@ function UsersTable(props: IUsersTableProps) {
                 </tbody>
             </table>
 
-            <UserDataModal
+            <UserDeleteModal
+                openState={deleteDataModalShow}
+                setOpenState={setDeleteDataModalShow}
+                confirmAction={() => deleteUser()}
+            />
+
+            <HandleDataModal
               openState={tableDataModalShow}
               setOpenState={setTableDataModalShow}
               modalTitle={getDataModalLabels().title}
               extraAction={() => setInitialFormValues(defaultFormValues)}
-            
+
               children={<>
                     <Formik
                         initialValues={initialFormValues}
