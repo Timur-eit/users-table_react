@@ -8,3 +8,11 @@ table {
         border: solid black 1px;
     }
 }
+
+form {
+    .submit-btn {        
+        &--disabled {
+            opacity: 0.4;
+        }
+    }
+}

@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 
+import classNames from "classnames";
+
 import './style.scss';
 import {Button} from 'react-bootstrap';
 import UserDeleteModal from 'components/DeleteUserModal';
@@ -13,6 +15,8 @@ import {IColumnsNames} from 'data/initialTableData'
 import {getByPlaceholderText} from 'shared/utils'
 
 import validate from 'components/Table/validation/validation'
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
     IUserData,
@@ -95,6 +99,11 @@ function UsersTable(props: IUsersTableProps) {
         }
     }, [tableState, initialTableData]);
 
+    const submitButtonClasses = classNames({
+        "submit-btn": true,
+        "submit-btn--disabled": !submitAvailable,
+      });
+
     return (
         <>
             <Button variant="primary" onClick={() => {
@@ -169,12 +178,20 @@ function UsersTable(props: IUsersTableProps) {
                                 {Object.keys(columnData).map((fieldName, i) => {
                                     return (
                                         <div key={fieldName + i}>
+                                            {console.log(errors)}
+                                            {touched &&
+                                                touched[fieldName] && 
+                                                errors &&
+                                                errors[fieldName] && (
+                                              <p className="error-message">{errors[fieldName]}</p>
+                                            )}
                                             <label htmlFor={fieldName}>{columnData[fieldName]}</label>
-                                            <Field id={fieldName} name={fieldName} placeholder={getByPlaceholderText(fieldName)} required/>
+                                            <Field id={fieldName} name={fieldName} placeholder={getByPlaceholderText(fieldName)} />
                                         </div>
                                     )
                                 })}
-                                <Button disabled={!submitAvailable} type="submit">{getDataModalLabels().confirmButton}</Button>
+                                <Button className={submitButtonClasses} type="submit">{getDataModalLabels().confirmButton}</Button>
+                                {/* <Button disabled={!submitAvailable} type="submit">{getDataModalLabels().confirmButton}</Button> */}
                             </Form>
                         )}
                     </Formik>
