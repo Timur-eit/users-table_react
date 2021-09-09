@@ -1,5 +1,10 @@
-table {
-    width: 100vw;
+@import "shared/styles_modules/colors";
+
+table {    
+    width: 100%;  
+
+
+
     thead, tbody {
         width: 100%;
         border-bottom: solid black 1px;
@@ -8,15 +13,18 @@ table {
     th, td {
         border-bottom: solid black 1px;
     }
-}
 
-form {
-    .submit-btn {
-        &--disabled {
-            opacity: 0.4;
-            &:hover {
-                cursor: default;
+
+    form {
+        .submit-btn {
+            &--disabled {
+                opacity: 0.4;
+                &:hover {
+                    cursor: default;
+                }
             }
         }
     }
+    
 }
+

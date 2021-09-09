@@ -1,0 +1,47 @@
+@import "shared/styles_modules/colors";
+@import "shared/styles_modules/cross";
+
+.table-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 32px 0;
+
+    .table-header__buttons-block {
+        button {
+            width: 159px;
+            height: 36px;
+            padding: 8px, 32px, 8px, 32px;
+            border: 6px;
+            background-color: $confirmButtonDefault;
+            position: relative;
+
+            .cross {
+                &.cross:before,
+                &.cross:after {
+                    content: "";
+                    position: absolute;
+                    // top: 11px;
+                    left: 25px;
+                    width: 12.9px;
+                    height: 1.2px;
+                    background: #ffff
+                }
+            }
+            span {
+                position: absolute;
+                top: 8px;
+                left: 60px;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 20px;
+                text-align: center;
+                letter-spacing: 0.02em;
+            }
+        }
+    }
+}
+
+

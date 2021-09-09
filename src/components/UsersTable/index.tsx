@@ -21,6 +21,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TextInput from 'components/TextInput'
 
 import UserTableRow from 'components/UserTableRow';
+import TableHeader from 'components/TableHeader';
 
 import {
     IUserData,
@@ -109,14 +110,15 @@ function UsersTable(props: IUsersTableProps) {
       });
 
     return (
-        <>
-            <Button variant="primary" onClick={() => {
-                setTableDataModalShow(true)
-                setModifyTableState(SET_NEW_USER_DATA);
+        <div className='table'>
+            <TableHeader
+                title={'Пользователи'}
+                buttonClickAction={() => {
+                    setTableDataModalShow(true)
+                    setModifyTableState(SET_NEW_USER_DATA);
+              }}
 
-            }}>
-              + Добавить пользователя
-            </Button>
+            />
 
             <table>
                 <thead>
@@ -189,7 +191,7 @@ function UsersTable(props: IUsersTableProps) {
                     </Formik>
                 </>}
             />
-        </>
+        </div>
     )
 }
 
