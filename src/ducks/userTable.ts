@@ -68,8 +68,10 @@ export const deleteUserData: usersTableActionCreator = (dispatcher, state, userI
 }
 
 export const setUserData: usersTableActionCreator = (dispatcher, state, userData: IUserData) => {
-    const prevUsersData = state && state.tableData;
-    const updatedUsersData = prevUsersData && [...prevUsersData, userData];
+    const prevUsersData = state.tableData as IUserData[];    
+    const prevUsersDataCopy = [...prevUsersData];
+    prevUsersDataCopy.unshift(userData);
+    const updatedUsersData = prevUsersDataCopy;
     
     const action: usersTableAction = {
       type: SET_NEW_USER_DATA,
