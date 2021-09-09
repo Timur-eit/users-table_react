@@ -1,5 +1,7 @@
+@import "shared/styles_modules/sizes";
+
 .left-side-bar {
     width: 280px;
-    height: 100vh;
+    height: calc(100vh - $mainHeaderHeight);
     background-color: #ffff;
 }

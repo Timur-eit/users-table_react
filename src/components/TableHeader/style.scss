@@ -7,6 +7,15 @@
     justify-content: space-between;
     align-items: center;
     margin: 32px 0;
+    
+    .table-header__title {        
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;        
+        align-items: center;
+        letter-spacing: 0.02em;
+    }
 
     .table-header__buttons-block {
         button {

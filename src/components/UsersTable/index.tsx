@@ -122,10 +122,12 @@ function UsersTable(props: IUsersTableProps) {
 
             <table>
                 <thead>
-                    <tr>
+                    <tr className='table-row'>
                         {Object.values(columnData).map((item) => {
                             return <th key={item}>{item}</th>;
                         })}
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,7 +136,7 @@ function UsersTable(props: IUsersTableProps) {
                                     user={user}
                                     userIndex={i}
                                     correctDataAction={correctData}
-                                    prepareToDeleteUserDataAction={prepareToDeleteUserData} 
+                                    prepareToDeleteUserDataAction={prepareToDeleteUserData}
                                 />)
                     })}
                 </tbody>

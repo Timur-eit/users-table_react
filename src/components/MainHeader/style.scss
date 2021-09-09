@@ -1,7 +1,10 @@
 @import "shared/styles_modules/colors";
+@import "shared/styles_modules/sizes";
 
 .header {
     width: 100vw;
-    height: 56px;
+    height: $mainHeaderHeight;
     background-color: $header;
+    position: fixed;
+    z-index: 2;
 }

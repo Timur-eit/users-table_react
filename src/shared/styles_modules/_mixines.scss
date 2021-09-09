@@ -1,11 +1,18 @@
 @import "./colors";
 
-@mixin mainHeader {
-  color: $primaryFont;
-  font-weight: 500;
-  font-size: 40px;
-  line-height: 38px;
+@mixin tableRow {
+  background-color: #ffff;
+  height: 40px;
+  border:green 0.5px solid;  
+  border-radius: 10%;
+  margin: 2em 0;
 }
+
+@mixin tableCell {
+  background-color: #ffff;  
+}
+
+
 @mixin errorMessage {
   color: $errorFont;
   font-weight: 400;
