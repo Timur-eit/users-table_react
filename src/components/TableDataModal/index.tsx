@@ -1,41 +1,30 @@
 import ModalWindow from "shared/ui/Modal";
-import getSubmitModalData from "./submitModalData";
-
-import {
-  IUserData,
-} from 'ducks/userTable';
-
 export interface ITableDataModalProps {
-  // userName?: string | null;
-  // openState: boolean;
-  // setOpenState: (state: boolean) => void;
-  // additionalStateHandler: (state: boolean) => void,
-  [prop: string]: any
+  openState: boolean,
+  setOpenState: (state: boolean) => void,
+  modalTitle: string,
+  confirmButtonLabel: string,
+  children: React.ReactElement,
 }
 
 function TableDataModal(props: ITableDataModalProps) {
-
   const {
     openState,
     setOpenState,
+    modalTitle,
+    confirmButtonLabel,
     children
   } = props;
 
-  // console.log(state);
+  return (
 
-
-  const submitMessage = getSubmitModalData();
-
-  return (    
-    
     <ModalWindow
-      modalData={submitMessage}
-      declineButton={false}
+      modalTitle={modalTitle}
+      confirmButtonLabel={confirmButtonLabel}
+      declineButton={true}
       openState={openState}
       setOpenState={setOpenState}
       children={children}
-      // additionalStateHandler={additionalStateHandler}
-
     />
   );
 }

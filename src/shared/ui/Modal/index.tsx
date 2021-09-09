@@ -18,23 +18,24 @@ export interface IModalWindowProps {
 
 function ModalWindow(props: IModalWindowProps) {
   const {
-    modalData,
+    modalTitle,
     declineButton,
     openState,
     setOpenState,
+    confirmButtonLabel,
     // additionalStateHandler,
     // acceptAction,
     // declineAction,
     children
   } = props;
 
-  // const [show, setShow] = useState(false);
-  
+  // const [show, setShow] = React.useState(false);
+
   const handleClose = () => {
     // setShow(false)
     setOpenState(false);
   };
-  
+
   // const handleShow = () => setShow(true);
 
   // const handleClose = (): void => {
@@ -64,25 +65,30 @@ function ModalWindow(props: IModalWindowProps) {
   return (
     <>
       <Modal
-        show={openState}        
-        // onHide={onHide ? () => handleClose() : null}
+        show={openState}
         centered
+        onHide={handleClose}
       >
-        <div className="modal-title-block">
-          <Modal.Title>{modalData && modalData.title}</Modal.Title>    
+
+      <Modal.Header closeButton>
+      {/* <div className="modal-title-block"> */}
+          <Modal.Title>{modalTitle}</Modal.Title>
             {declineButton && (
               <div
                 // onClick={() => declineHanlder()}
                 className={"decline-btn"}
               ></div>
             )}
-          </div>        
+          {/* </div>         */}
+
+      </Modal.Header>
+
         <Modal.Body>
-          
+
           {/* {modalData && modalData.content} */}
           {children}
           <Button variant="primary" onClick={handleClose}>
-            {modalData && modalData.closeButtonLabel}
+            {confirmButtonLabel}
           </Button>
         </Modal.Body>
       </Modal>

@@ -1,11 +1,14 @@
 import React from 'react';
-import Table from 'components/Table';
+import UsersTable from 'components/Table';
+import {columnNames, defaultFormValues, initialTableData} from 'data/initialTableData';
 
 function App() {
   return (
-    <>
-      <Table/>
-    </>
+      <UsersTable
+        columns={columnNames}
+        initialTableData={initialTableData}
+        defaultFormValues={defaultFormValues}
+      />
   );
 }
 
