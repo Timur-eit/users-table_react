@@ -1,6 +1,11 @@
 import React from 'react';
 import {IUserData} from 'ducks/userTable'
 
+import correctDataBtnImg from 'shared/img/correct-data-button.svg';
+import deleteBtnImg from 'shared/img/delete-button.svg';
+
+import './style.scss';
+
 interface IUserTableRowProps {
     user: IUserData,
     userIndex: number,
@@ -17,19 +22,15 @@ function UserTableRow(props: IUserTableRowProps) {
     } = props;
 
     return (
-        <tr key={user.login + userIndex}>
+        <tr className='table-row' key={user.login + userIndex}>
             {Object.keys(user).map((userData, i) => {
                 return <td key={userData + i}>{user[userData]}</td>
             })}
             <td>
-                <button onClick={() => correctDataAction(user, userIndex)}>
-                    CORRECT DATA
-                </button>
+                <img src={correctDataBtnImg} alt='correct data' onClick={() => correctDataAction(user, userIndex)} />
             </td>
             <td>
-                <button onClick={() => prepareToDeleteUserDataAction(userIndex)}>
-                    DELETE
-                </button>
+                <img src={deleteBtnImg} alt='delete data' onClick={() => prepareToDeleteUserDataAction(userIndex)} />
             </td>
         </tr>
     )
