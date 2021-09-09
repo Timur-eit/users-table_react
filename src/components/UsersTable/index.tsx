@@ -14,9 +14,13 @@ import {IColumnsNames} from 'data/initialTableData'
 
 import {getByPlaceholderText} from 'shared/utils'
 
-import validate from 'components/Table/validation/validation'
+import validate from 'components/UsersTable/validation/validation'
 
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import TextInput from 'components/TextInput'
+
+import UserTableRow from 'components/UserTableRow';
 
 import {
     IUserData,
@@ -124,23 +128,12 @@ function UsersTable(props: IUsersTableProps) {
                 </thead>
                 <tbody>
                     {tableState.tableData && tableState.tableData.map((user, i) => {
-                        return (
-                            <tr key={user.login + i}>
-                                {Object.keys(user).map((userData, i) => {
-                                    return <td key={userData + i}>{user[userData]}</td>
-                                })}
-                                <td>
-                                    <button onClick={() => correctData(user, i)}>
-                                        CORRECT DATA
-                                    </button>
-                                </td>
-                                <td>
-                                    <button onClick={() => prepareToDeleteUserData(i)}>
-                                        DELETE
-                                    </button>
-                                </td>
-                            </tr>
-                        )
+                        return (<UserTableRow
+                                    user={user}
+                                    userIndex={i}
+                                    correctDataAction={correctData}
+                                    prepareToDeleteUserDataAction={prepareToDeleteUserData} 
+                                />)
                     })}
                 </tbody>
             </table>
@@ -178,20 +171,19 @@ function UsersTable(props: IUsersTableProps) {
                                 {Object.keys(columnData).map((fieldName, i) => {
                                     return (
                                         <div key={fieldName + i}>
-                                            {console.log(errors)}
-                                            {touched &&
-                                                touched[fieldName] && 
-                                                errors &&
-                                                errors[fieldName] && (
-                                              <p className="error-message">{errors[fieldName]}</p>
-                                            )}
-                                            <label htmlFor={fieldName}>{columnData[fieldName]}</label>
-                                            <Field id={fieldName} name={fieldName} placeholder={getByPlaceholderText(fieldName)} />
+                                            <TextInput
+                                                inputName={fieldName}
+                                                labelName={columnData[fieldName]}
+                                                inputPlaceholder={getByPlaceholderText(fieldName)}
+                                                required={true}
+                                                FormikConnectorTag={Field}
+                                                touched={touched}
+                                                errors={errors}
+                                            />
                                         </div>
                                     )
                                 })}
                                 <Button className={submitButtonClasses} type="submit">{getDataModalLabels().confirmButton}</Button>
-                                {/* <Button disabled={!submitAvailable} type="submit">{getDataModalLabels().confirmButton}</Button> */}
                             </Form>
                         )}
                     </Formik>

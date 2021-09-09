@@ -1,0 +1,59 @@
+@import "shared/styles_modules/colors";
+@import "shared/styles_modules/mixines";
+
+.text-input {
+  p {
+    margin: 0;
+  }
+  width: 100%;
+  margin-bottom: 1em;
+
+  .label-name {
+    p {
+      margin: 0;
+    }
+    @include inputLabel;
+    display: flex;
+    sup {
+      margin-left: 0.3em;
+    }
+  }
+
+  position: relative;
+  .error-message {
+    position: absolute;
+    right: 0;
+    @include errorMessage;
+  }
+
+  ::placeholder {
+    color: $placeholderFont;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  input {
+    padding: 0.1em 0.5em;
+    width: 100%;
+    height: 40px;
+    border: 1px solid $inputBorder;
+    box-sizing: border-box;
+    border-radius: 2px;
+    color: $secondaryFont;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    &:hover {
+      border: 1px solid $inputHover;
+    }
+    &:not(:placeholder-shown) {
+      background-color: none;
+    }
+  }
+}
+
+sub,
+sup {
+  vertical-align: baseline;
+}
