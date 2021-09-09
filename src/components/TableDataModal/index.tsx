@@ -1,32 +1,32 @@
-import ModalWindow from "shared/ui/Modal";
-export interface ITableDataModalProps {
+import HandleDataModal from "shared/ui/Modal/HandleDataModal";
+export interface IUserDataModalProps {
   openState: boolean,
   setOpenState: (state: boolean) => void,
   modalTitle: string,
-  confirmButtonLabel: string,
+  // confirmButtonLabel: string,
   children: React.ReactElement,
+  extraAction: () => void,
 }
 
-function TableDataModal(props: ITableDataModalProps) {
+function UserDataModal(props: IUserDataModalProps) {
   const {
     openState,
     setOpenState,
     modalTitle,
-    confirmButtonLabel,
-    children
+    children,
+    extraAction
   } = props;
 
   return (
 
-    <ModalWindow
+    <HandleDataModal
       modalTitle={modalTitle}
-      confirmButtonLabel={confirmButtonLabel}
-      declineButton={true}
       openState={openState}
       setOpenState={setOpenState}
       children={children}
+      extraAction={extraAction}
     />
   );
 }
 
-export default TableDataModal;
+export default UserDataModal;

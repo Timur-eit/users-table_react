@@ -33,7 +33,7 @@ function UsersTable(props: IUsersTableProps) {
     } = props;
 
     const [tableState, dispatch] = React.useReducer<React.Reducer<IReducerRecord, usersTableAction>>(reducer, reducerRecord);
-    const [modalShow, setModalShow] = React.useState<boolean>(false);
+    const [tableDataModalShow, setTableDataModalShow] = React.useState<boolean>(false);
     const [modifyTableState, setModifyTableState] = React.useState<null | string>(null);
     const [initialFormValues, setInitialFormValues] = React.useState<IUserData>(defaultFormValues);
     const [userIndex, setUserIndex] = React.useState<null | number>(null);
@@ -41,7 +41,7 @@ function UsersTable(props: IUsersTableProps) {
     function correctData(obj: IUserData, index: number): void {
         setModifyTableState(CORRECT_USER_DATA);
         setInitialFormValues(obj)
-        setModalShow(true);
+        setTableDataModalShow(true);
         setUserIndex(index);
     }
 
@@ -77,7 +77,7 @@ function UsersTable(props: IUsersTableProps) {
     return (
         <>
             <Button variant="primary" onClick={() => {
-                setModalShow(true)
+                setTableDataModalShow(true)
                 setModifyTableState(SET_NEW_USER_DATA);
 
             }}>
@@ -116,10 +116,11 @@ function UsersTable(props: IUsersTableProps) {
             </table>
 
             <UserDataModal
-              openState={modalShow}
-              setOpenState={setModalShow}
+              openState={tableDataModalShow}
+              setOpenState={setTableDataModalShow}
               modalTitle={getDataModalLabels().title}
-              confirmButtonLabel={getDataModalLabels().confirmButton}
+              extraAction={() => setInitialFormValues(defaultFormValues)}
+            
               children={<>
                     <Formik
                         initialValues={initialFormValues}
@@ -130,7 +131,7 @@ function UsersTable(props: IUsersTableProps) {
                                 correctUserData(dispatch, tableState, values, userIndex);
                                 setInitialFormValues(defaultFormValues);
                             }
-                            setModalShow(false);
+                            setTableDataModalShow(false);
                             setSubmitting(false)
                             resetForm();
                             setModifyTableState(null);
@@ -147,7 +148,7 @@ function UsersTable(props: IUsersTableProps) {
                             <Field id="email" name="email" placeholder="pass email" required/>
                             <label htmlFor="login">Логин</label>
                             <Field id="login" name="login" placeholder="pass login" required/>
-                            <button type="submit">Submit</button>
+                            <Button type="submit">{getDataModalLabels().confirmButton}</Button>
                         </Form>
                     </Formik>
                 </>}
