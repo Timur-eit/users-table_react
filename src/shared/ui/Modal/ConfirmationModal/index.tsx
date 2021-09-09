@@ -37,7 +37,12 @@ function ConfirmationModal(props: IConfirmationWindowProps) {
 	}
 
 	return (
-		<Modal show={openState} onHide={handleClose} centered>
+		<Modal 
+			show={openState}
+			onHide={handleClose}
+			centered
+			backdrop="static"
+		>
 		  <Modal.Header>
 			<Modal.Title>{modalTitle}</Modal.Title>
 		  </Modal.Header>

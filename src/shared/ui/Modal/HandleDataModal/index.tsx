@@ -30,6 +30,7 @@ function HandleDataModal(props: IModalWindowProps) {
 			show={openState}
 			centered
 			onHide={handleClose}
+			backdrop="static"
 		>
 			<Modal.Header closeButton>
 				<Modal.Title>{modalTitle}</Modal.Title>

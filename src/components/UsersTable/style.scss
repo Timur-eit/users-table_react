@@ -11,9 +11,12 @@ table {
 }
 
 form {
-    .submit-btn {        
+    .submit-btn {
         &--disabled {
             opacity: 0.4;
+            &:hover {
+                cursor: default;
+            }
         }
     }
 }

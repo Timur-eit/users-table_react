@@ -48,7 +48,7 @@ export const reducer: React.Reducer<IReducerRecord, usersTableAction> = (state, 
 
 type usersTableActionCreator = (dispatcher: (action: any) => void, state: IReducerRecord, ...params: any) => void;
 
-export const getUsersList: usersTableActionCreator = (dispatcher, _state, usersList: IUserData[]) => {    
+export const getUsersList: usersTableActionCreator = (dispatcher, _state, usersList: IUserData[]) => {
   const action: usersTableAction = {
     type: GET_USERS_DATA,
     payload: usersList,
@@ -59,7 +59,7 @@ export const getUsersList: usersTableActionCreator = (dispatcher, _state, usersL
 export const deleteUserData: usersTableActionCreator = (dispatcher, state, userIndex: number) => {
     const prevUsersData = state && state.tableData;
     const updatedUsersData = prevUsersData && [...prevUsersData].filter((_, i) => i !== userIndex);
-    
+
     const action: usersTableAction = {
       type: DELETE_USER_DATA,
       payload: updatedUsersData,
@@ -68,32 +68,29 @@ export const deleteUserData: usersTableActionCreator = (dispatcher, state, userI
 }
 
 export const setUserData: usersTableActionCreator = (dispatcher, state, userData: IUserData) => {
-    const prevUsersData = state.tableData as IUserData[];    
+    const prevUsersData = state.tableData as IUserData[];
     const prevUsersDataCopy = [...prevUsersData];
     prevUsersDataCopy.unshift(userData);
     const updatedUsersData = prevUsersDataCopy;
-    
+
     const action: usersTableAction = {
       type: SET_NEW_USER_DATA,
       payload: updatedUsersData,
-    }    
+    }
     dispatcher(action)
 }
 
-export const correctUserData: usersTableActionCreator = (dispatcher, state, userData: IUserData, index: number) => {      
-  const prevUsersData = state && state.tableData;
-    const updatedUsersData = prevUsersData && [...prevUsersData.map((user, i) => {      
-      if (i === index) {        
-        return {...user, ...userData};
-      }
-      return user;
-    })];
+export const correctUserData: usersTableActionCreator = (dispatcher, state, userData: IUserData, index: number) => {
+    const prevUsersData = state.tableData as IUserData[];    
+    const filteredUsersData = [...prevUsersData].filter((_, i) => i !== index);
+    filteredUsersData.unshift(userData);
+    const updatedUsersData = filteredUsersData;
 
     const action: usersTableAction = {
       type: SET_NEW_USER_DATA,
       payload: updatedUsersData,
     };
 
-    dispatcher(action);
+      dispatcher(action);
 }
 
