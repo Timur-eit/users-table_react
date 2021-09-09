@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 
 import './style.scss';
@@ -7,6 +7,10 @@ import UserDeleteModal from 'components/DeleteUserModal';
 
 import HandleDataModal from 'shared/ui/Modal/HandleDataModal'
 // import ConfirmationModal from 'shared/ui/Modal/ConfirmationModal';
+
+import {IColumnsNames} from 'data/initialTableData'
+
+import {getByPlaceholderText} from 'shared/utils'
 
 import validate from 'components/Table/validation/validation'
 
@@ -25,14 +29,14 @@ import {
 } from 'ducks/userTable';
 
 interface IUsersTableProps {
-    columns: string[],
+    columnData: IColumnsNames,
     initialTableData: IUserData[],
     defaultFormValues: IUserData,
 }
 
 function UsersTable(props: IUsersTableProps) {
     const {
-        columns,
+        columnData,
         initialTableData,
         defaultFormValues,
     } = props;
@@ -104,7 +108,7 @@ function UsersTable(props: IUsersTableProps) {
             <table>
                 <thead>
                     <tr>
-                        {columns.map((item) => {
+                        {Object.values(columnData).map((item) => {
                             return <th key={item}>{item}</th>;
                         })}
                     </tr>
@@ -159,21 +163,20 @@ function UsersTable(props: IUsersTableProps) {
                             resetForm();
                             setModifyTableState(null);
                         }}
-                        validate={(values) => validate(values, setSubmitAvailable)}
-                    >
-                        <Form>
-                            <label htmlFor="lastName">Фамилия</label>
-                            <Field id="lastName" name="lastName" placeholder="pass lastName" required/>
-                            <label htmlFor="firstName">Имя</label>
-                            <Field id="firstName" name="firstName" placeholder="pass firstName" required/>
-                            <label htmlFor="midleName">Отчество</label>
-                            <Field id="midleName" name="midleName" placeholder="pass midleName" required/>
-                            <label htmlFor="email">E-mail</label>
-                            <Field id="email" name="email" placeholder="pass email" required/>
-                            <label htmlFor="login">Логин</label>
-                            <Field id="login" name="login" placeholder="pass login" required/>                            
-                            <Button disabled={!submitAvailable} type="submit">{getDataModalLabels().confirmButton}</Button>
-                        </Form>
+                        validate={(values) => validate(values, setSubmitAvailable)}>
+                        {({ errors, touched }) => (
+                            <Form>
+                                {Object.keys(columnData).map((fieldName, i) => {
+                                    return (
+                                        <div key={fieldName + i}>
+                                            <label htmlFor={fieldName}>{columnData[fieldName]}</label>
+                                            <Field id={fieldName} name={fieldName} placeholder={getByPlaceholderText(fieldName)} required/>
+                                        </div>
+                                    )
+                                })}
+                                <Button disabled={!submitAvailable} type="submit">{getDataModalLabels().confirmButton}</Button>
+                            </Form>
+                        )}
                     </Formik>
                 </>}
             />
