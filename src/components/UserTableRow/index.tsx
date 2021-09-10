@@ -22,14 +22,12 @@ function UserTableRow(props: IUserTableRowProps) {
     } = props;
 
     return (
-        <tr className='table-row' key={user.login + userIndex}>
+        <tr className='tbdoy-row' key={user.login + userIndex}>
             {Object.keys(user).map((userData, i) => {
                 return <td key={userData + i}>{user[userData]}</td>
             })}
-            <td>
-                <img src={correctDataBtnImg} alt='correct data' onClick={() => correctDataAction(user, userIndex)} />
-            </td>
-            <td>
+            <td className='tbdoy-row__control-panel'>
+                <img src={correctDataBtnImg} alt='correct data' onClick={() => correctDataAction(user, userIndex)} />            
                 <img src={deleteBtnImg} alt='delete data' onClick={() => prepareToDeleteUserDataAction(userIndex)} />
             </td>
         </tr>

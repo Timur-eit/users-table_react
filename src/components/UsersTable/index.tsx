@@ -127,19 +127,20 @@ function UsersTable(props: IUsersTableProps) {
                             return <th key={item}>{item}</th>;
                         })}
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
                     {tableState.tableData && tableState.tableData.map((user, i) => {
-                        return (<UserTableRow
+                        return (
+                            <tbody>
+                                <UserTableRow
                                     user={user}
                                     userIndex={i}
                                     correctDataAction={correctData}
                                     prepareToDeleteUserDataAction={prepareToDeleteUserData}
-                                />)
+                                />
+                            </tbody>
+                        )
                     })}
-                </tbody>
             </table>
 
             <UserDeleteModal

@@ -3,24 +3,51 @@
 
 .table {
     padding: 0 32px;
+    overflow: scroll;
     table {
         width: 100%;
-        background-color: #ffff;
         border-collapse: separate;
+        thead {
+            th {
+                @include tableFont;
+                font-weight: bold;
+                color: $fontDefault;
+            }
 
+        }
+        tbody {
+            td {
+                @include tableFont;
+                font-weight: normal;
+                color: $tableBodyFont;
+            }
+        }
+        thead::after, tbody::after {
+            @include pseudoRow;
+        }
 
         tr {
-            @include tableRow;
+            > th, td {
+                @include tableRow;
+            }
             > th:first-child,
             td:first-child,
             th:first-child,
-            td:first-child,
-            th:last-child,
+            td:first-child {
+                @include tableRow;
+                border-top-left-radius: 6px;
+                border-bottom-left-radius: 6px;
+                padding-left: 32px;
+            }
+            > th:last-child,
             td:last-child,
             th:last-child,
             td:last-child {
-                border: 2px blue solid;
-                border-radius: 10px;
+                @include tableRow;
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+                padding-right: 32px;
+
             }
         }
 

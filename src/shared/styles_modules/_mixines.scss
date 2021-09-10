@@ -1,17 +1,25 @@
 @import "./colors";
 
-@mixin tableRow {
-  background-color: #ffff;
-  height: 40px;
-  border:green 0.5px solid;  
-  border-radius: 10%;
-  margin: 2em 0;
+@mixin tableRow {  
+    height: 40px;
+    border: 1px #ffff solid;
+    background-color: #ffff;  
 }
 
-@mixin tableCell {
-  background-color: #ffff;  
+@mixin pseudoRow {
+    height: 4px;
+    display: table-row;
+    content: '';
 }
 
+@mixin tableFont {
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+}
+
+// todo delete below
 
 @mixin errorMessage {
   color: $errorFont;
