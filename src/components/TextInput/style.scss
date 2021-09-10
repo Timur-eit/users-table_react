@@ -6,17 +6,15 @@
     margin: 0;
   }
   width: 100%;
-  margin-bottom: 1em;
+//   margin-bottom: 1em;
 
   .label-name {
-    p {
-      margin: 0;
-    }
-    @include inputLabel;
-    display: flex;
-    sup {
-      margin-left: 0.3em;
-    }
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    color: #818C99;
   }
 
   position: relative;
@@ -27,30 +25,38 @@
   }
 
   ::placeholder {
-    color: $placeholderFont;
+    font-style: normal;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    color: #B8C1CC;
+
+
   }
 
-  input {
-    padding: 0.1em 0.5em;
-    width: 100%;
-    height: 40px;
-    border: 1px solid $inputBorder;
-    box-sizing: border-box;
-    border-radius: 2px;
-    color: $secondaryFont;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
-    &:hover {
-      border: 1px solid $inputHover;
+    input {        
+        background: #F9FAFC;
+        border: 2px solid #EBECEF;
+        box-sizing: border-box;
+        border-radius: 6px;
+        padding: 0.1em 0.5em;
+        width: 100%;
+        height: 36px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+
+        letter-spacing: 0.02em;
+        color: #353D4B;
+        &:hover {
+            border: 1px solid $inputHover;
+        }
+        &:not(:placeholder-shown) {
+        background-color: none;
+        }
     }
-    &:not(:placeholder-shown) {
-      background-color: none;
-    }
-  }
 }
 
 sub,

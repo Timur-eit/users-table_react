@@ -4,7 +4,8 @@
 .handle-data-modal {
     margin: 0 auto;
     .modal-content {
-        min-height: 564px;
+        height: 620px;
+        min-width: 608px;
         .modal-header {
             background-color: $header;
             color: #ffff;
@@ -22,11 +23,19 @@
 
         .modal-body {
             padding: 0;
-            
+
             .modal-children {
                 height: 100%;
                 width: 100%;
                 position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                > div {
+                    width: 100%;
+                    height: calc(100% - 60px);
+                    padding: 0 64px;
+                }
                 .modal-footer {
                     > * {
                         margin: 0;
@@ -36,6 +45,7 @@
                     position: absolute;
                     width: 100%;
                     bottom: 0;
+                    left: 0;
                     height: 60px;
                     display: flex;
                     justify-content: flex-end;
@@ -44,14 +54,14 @@
                         width: 150px;
                         height: 36px;
                     }
-                    
+
                 }
-                
+
             }
         }
 
 
-        
+
     }
 
 

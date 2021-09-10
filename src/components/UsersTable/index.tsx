@@ -3,7 +3,7 @@ import { Formik, Field, Form, FormikHelpers } from 'formik';
 
 import classNames from "classnames";
 
-import './style.scss';
+
 import {Button, Modal} from 'react-bootstrap';
 import UserDeleteModal from 'components/DeleteUserModal';
 
@@ -22,6 +22,8 @@ import TextInput from 'components/TextInput'
 
 import UserTableRow from 'components/UserTableRow';
 import TableHeader from 'components/TableHeader';
+
+import './style.scss';
 
 import {
     IUserData,
@@ -107,7 +109,7 @@ function UsersTable(props: IUsersTableProps) {
     const submitButtonClasses = classNames({
         "submit-btn": true,
         "submit-btn--disabled": !submitAvailable,
-      });
+      });      
 
     return (
         <div className='table'>

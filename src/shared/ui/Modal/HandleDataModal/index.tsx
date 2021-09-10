@@ -37,7 +37,9 @@ function HandleDataModal(props: IModalWindowProps) {
 				<Modal.Title>{modalTitle}</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-			    <div className='modal-children'>{children}</div>
+			    <div className='modal-children'>
+					<div>{children}</div>
+				</div>
 			</Modal.Body>
 		</Modal>
 	);
