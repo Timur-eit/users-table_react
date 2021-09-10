@@ -1,39 +1,39 @@
-@import "shared/styles_modules/colors";
-@import "shared/styles_modules/mixines";
+@import 'shared/styles_modules/colors';
+@import 'shared/styles_modules/mixines';
 
 .text-input {
-  p {
-    margin: 0;
-  }
-  width: 100%;
-  .label-name {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.02em;
-    color: #818C99;
-  }
+    p {
+        margin: 0;
+    }
+    width: 100%;
+    .label-name {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.02em;
+        color: #818c99;
+    }
 
-  position: relative;
-  .error-message {
-    position: absolute;
-    right: 0;
-    @include errorMessage;
-  }
+    position: relative;
+    .error-message {
+        position: absolute;
+        right: 0;
+        @include errorMessage;
+    }
 
-  ::placeholder {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.02em;
-    color: #B8C1CC;
-  }
+    ::placeholder {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.02em;
+        color: #b8c1cc;
+    }
 
-    input {        
-        background: #F9FAFC;
-        border: 2px solid #EBECEF;
+    input {
+        background: #f9fafc;
+        border: 2px solid #ebecef;
         box-sizing: border-box;
         border-radius: 6px;
         padding: 0.1em 0.5em;
@@ -45,17 +45,17 @@
         line-height: 20px;
 
         letter-spacing: 0.02em;
-        color: #353D4B;
+        color: #353d4b;
         &:hover {
             border: 1px solid $inputHover;
         }
         &:not(:placeholder-shown) {
-        background-color: none;
+            background-color: none;
         }
     }
 }
 
 sub,
 sup {
-  vertical-align: baseline;
+    vertical-align: baseline;
 }

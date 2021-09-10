@@ -1,24 +1,24 @@
 .cross {
-  position: relative;
-  top: 0;
-  right: 0;  
-  cursor: pointer;
-
-  &.cross:before,
-  &.cross:after {
-    content: "";
-    position: absolute;
+    position: relative;
     top: 0;
-    left: 0;
-    width: 10px;
-    height: 2px;
-    background: #ffff
-  }
+    right: 0;
+    cursor: pointer;
 
-  &.cross:before {
-    transform: rotate(90deg);
-  }
-  &.cross:after {
-    // transform: rotate(-45deg);
-  }
+    &.cross:before,
+    &.cross:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 2px;
+        background: #ffff;
+    }
+
+    &.cross:before {
+        transform: rotate(90deg);
+    }
+    &.cross:after {
+        // transform: rotate(-45deg);
+    }
 }

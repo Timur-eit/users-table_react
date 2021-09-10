@@ -1,16 +1,12 @@
-import ConfirmationModal from "shared/ui/Modal/ConfirmationModal";
+import ConfirmationModal from 'shared/ui/Modal/ConfirmationModal';
 export interface IUserDeleteModalProps {
-    openState: boolean,
-    setOpenState: (state: boolean) => void,
-    confirmAction: () => void,
+    openState: boolean;
+    setOpenState: (state: boolean) => void;
+    confirmAction: () => void;
 }
 
 function UserDeleteModal(props: IUserDeleteModalProps) {
-    const {
-        openState,
-        setOpenState,
-        confirmAction,
-    } = props;
+    const { openState, setOpenState, confirmAction } = props;
 
     return (
         <ConfirmationModal
@@ -22,7 +18,7 @@ function UserDeleteModal(props: IUserDeleteModalProps) {
             setOpenState={setOpenState}
             confirmAction={confirmAction}
         />
-  );
+    );
 }
 
 export default UserDeleteModal;

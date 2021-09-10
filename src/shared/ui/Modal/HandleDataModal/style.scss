@@ -1,5 +1,5 @@
-@import "shared/styles_modules/colors";
-@import "shared/styles_modules/mixines";
+@import 'shared/styles_modules/colors';
+@import 'shared/styles_modules/mixines';
 
 .handle-data-modal {
     margin: 0 auto;
@@ -54,21 +54,11 @@
                         width: 150px;
                         height: 36px;
                     }
-
                 }
-
             }
         }
-
-
-
     }
-
-
 }
-
-
-
 
 // .modal-dialog {
 //   margin: 0;

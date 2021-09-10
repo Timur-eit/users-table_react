@@ -6,15 +6,15 @@ export const SET_NEW_USER_DATA = 'SET_NEW_USER_DATA';
 export const CORRECT_USER_DATA = 'CORRECT_USER_DATA';
 
 export interface IUserData {
-    [property: string]: string,
-    lastName: string,
-    firstName: string,
-    midleName: string,
-    email: string,
-    login: string,
+    [property: string]: string;
+    lastName: string;
+    firstName: string;
+    midleName: string;
+    email: string;
+    login: string;
 }
 
-export type usersTableAction = {type: string, payload: null | IUserData[]}
+export type usersTableAction = { type: string; payload: null | IUserData[] };
 
 export interface IReducerRecord {
     tableData: null | IUserData[];
@@ -25,47 +25,51 @@ export const reducerRecord: IReducerRecord = {
 };
 
 export const reducer: React.Reducer<IReducerRecord, usersTableAction> = (state, action) => {
-  switch (action.type) {
-    case GET_USERS_DATA:
-      return {
-        ...state,
-        tableData: action.payload,
-        }
-    case DELETE_USER_DATA:
-      return {
-        ...state,
-        tableData: action.payload,
-        }
-    case SET_NEW_USER_DATA:
-      return {
-        ...state,
-        tableData: action.payload,
-        }
-      default:
-        return state
-  }
+    switch (action.type) {
+        case GET_USERS_DATA:
+            return {
+                ...state,
+                tableData: action.payload,
+            };
+        case DELETE_USER_DATA:
+            return {
+                ...state,
+                tableData: action.payload,
+            };
+        case SET_NEW_USER_DATA:
+            return {
+                ...state,
+                tableData: action.payload,
+            };
+        default:
+            return state;
+    }
 };
 
-type usersTableActionCreator = (dispatcher: (action: any) => void, state: IReducerRecord, ...params: any) => void;
+type usersTableActionCreator = (
+    dispatcher: (action: any) => void,
+    state: IReducerRecord,
+    ...params: any
+) => void;
 
 export const getUsersList: usersTableActionCreator = (dispatcher, _state, usersList: IUserData[]) => {
-  const action: usersTableAction = {
-    type: GET_USERS_DATA,
-    payload: usersList,
-  }
-  dispatcher(action)
-}
+    const action: usersTableAction = {
+        type: GET_USERS_DATA,
+        payload: usersList,
+    };
+    dispatcher(action);
+};
 
 export const deleteUserData: usersTableActionCreator = (dispatcher, state, userIndex: number) => {
     const prevUsersData = state && state.tableData;
     const updatedUsersData = prevUsersData && [...prevUsersData].filter((_, i) => i !== userIndex);
 
     const action: usersTableAction = {
-      type: DELETE_USER_DATA,
-      payload: updatedUsersData,
-    }
-    dispatcher(action)
-}
+        type: DELETE_USER_DATA,
+        payload: updatedUsersData,
+    };
+    dispatcher(action);
+};
 
 export const setUserData: usersTableActionCreator = (dispatcher, state, userData: IUserData) => {
     const prevUsersData = state.tableData as IUserData[];
@@ -74,23 +78,27 @@ export const setUserData: usersTableActionCreator = (dispatcher, state, userData
     const updatedUsersData = prevUsersDataCopy;
 
     const action: usersTableAction = {
-      type: SET_NEW_USER_DATA,
-      payload: updatedUsersData,
-    }
-    dispatcher(action)
-}
+        type: SET_NEW_USER_DATA,
+        payload: updatedUsersData,
+    };
+    dispatcher(action);
+};
 
-export const correctUserData: usersTableActionCreator = (dispatcher, state, userData: IUserData, index: number) => {
-    const prevUsersData = state.tableData as IUserData[];    
+export const correctUserData: usersTableActionCreator = (
+    dispatcher,
+    state,
+    userData: IUserData,
+    index: number
+) => {
+    const prevUsersData = state.tableData as IUserData[];
     const filteredUsersData = [...prevUsersData].filter((_, i) => i !== index);
     filteredUsersData.unshift(userData);
     const updatedUsersData = filteredUsersData;
 
     const action: usersTableAction = {
-      type: SET_NEW_USER_DATA,
-      payload: updatedUsersData,
+        type: SET_NEW_USER_DATA,
+        payload: updatedUsersData,
     };
 
-      dispatcher(action);
-}
-
+    dispatcher(action);
+};

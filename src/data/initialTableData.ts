@@ -1,6 +1,6 @@
 import { IUserData } from 'ducks/userTable';
 export interface IColumnsNames {
-    [fieldName: string]: string
+    [fieldName: string]: string;
 }
 
 export const columnNames: IColumnsNames = {
@@ -8,15 +8,15 @@ export const columnNames: IColumnsNames = {
     firstName: 'Имя',
     midleName: 'Отчество',
     email: 'E-mail',
-    login: 'Логин',    
-}
+    login: 'Логин',
+};
 
 export const defaultFormValues: IUserData = {
     lastName: '',
     firstName: '',
     midleName: '',
     email: '',
-    login: '',    
+    login: '',
 };
 
 export const initialTableData: IUserData[] = [

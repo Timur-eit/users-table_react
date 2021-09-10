@@ -1,28 +1,28 @@
-@import "shared/styles_modules/colors";
-@import "shared/styles_modules/mixines";
+@import 'shared/styles_modules/colors';
+@import 'shared/styles_modules/mixines';
 
 .modal-dialog {
-  margin: 0 auto;
-  .modal-content {
-    height: 204px;
-    .modal-body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      .modal-title-block {
-        .modal-title {
-          font-weight: bold;
+    margin: 0 auto;
+    .modal-content {
+        height: 204px;
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            .modal-title-block {
+                .modal-title {
+                    font-weight: bold;
+                }
+            }
+            .btn {
+                width: 100%;
+                background-color: $confirmButtonDefault;
+                transition-duration: 300ms;
+                &:hover {
+                    opacity: 0.9;
+                }
+            }
         }
-      }
-      .btn {
-        width: 100%;
-        background-color: $confirmButtonDefault;
-        transition-duration: 300ms;
-        &:hover {
-          opacity: 0.9;
-        }
-      }
     }
-  }
 }
