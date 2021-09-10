@@ -1,5 +1,4 @@
 import ConfirmationModal from "shared/ui/Modal/ConfirmationModal";
-
 export interface IUserDeleteModalProps {
     openState: boolean,
     setOpenState: (state: boolean) => void,

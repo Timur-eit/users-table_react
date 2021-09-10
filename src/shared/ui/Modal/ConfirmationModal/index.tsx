@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.scss";
@@ -10,8 +9,7 @@ export interface IConfirmationWindowProps {
 	confirmButtonText: string,
   	openState: boolean,
   	setOpenState: (state: boolean) => void,
-  	confirmAction: () => void,
-  	// children: React.ReactElement
+  	confirmAction: () => void,  	
 }
 
 function ConfirmationModal(props: IConfirmationWindowProps) {
@@ -42,6 +40,7 @@ function ConfirmationModal(props: IConfirmationWindowProps) {
 			onHide={handleClose}
 			centered
 			backdrop="static"
+			dialogClassName="confirmation-modal"
 		>
 		  <Modal.Header>
 			<Modal.Title>{modalTitle}</Modal.Title>

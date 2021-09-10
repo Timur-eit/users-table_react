@@ -28,8 +28,6 @@
     color: #FFFFFF;
 }
 
-// todo delete below
-
 @mixin errorMessage {
   color: $errorFont;
   font-weight: 400;
@@ -37,18 +35,4 @@
   line-height: 15px;
   margin: 0;
   padding: 0;
-}
-
-@mixin blockName {
-  color: $primaryFont;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 38px;
-}
-
-@mixin inputLabel {
-  color: $primaryFont;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 15px;
 }

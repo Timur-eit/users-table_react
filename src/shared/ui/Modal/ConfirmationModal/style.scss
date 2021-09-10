@@ -2,7 +2,7 @@
 @import "shared/styles_modules/mixines";
 
 .modal-dialog {
-  margin: 1em;
+  margin: 0 auto;
   .modal-content {
     height: 204px;
     .modal-body {
@@ -10,47 +10,17 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-
       .modal-title-block {
         .modal-title {
           font-weight: bold;
         }
-        .decline-btn {
-          position: absolute;
-          top: 5px;
-          right: 5px;
-          width: 55px;
-          height: 55px;
-          cursor: pointer;
-
-          &.decline-btn:before,
-          &.decline-btn:after {
-            content: "";
-            position: absolute;
-            top: 21px;
-            left: 10px;
-            width: 26px;
-            height: 2px;
-            background: $primary;
-          }
-
-          &.decline-btn:before {
-            transform: rotate(45deg);
-            /* margin-top: 20px; */
-          }
-
-          &.decline-btn:after {
-            transform: rotate(-45deg);
-          }
-        }
       }
-
       .btn {
         width: 100%;
-        background-color: $primary;
+        background-color: $confirmButtonDefault;
         transition-duration: 300ms;
         &:hover {
-          background-color: $hoverButton;
+          opacity: 0.9;
         }
       }
     }

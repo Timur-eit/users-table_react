@@ -7,12 +7,12 @@
     justify-content: space-between;
     align-items: center;
     margin: 32px 0;
-    
-    .table-header__title {        
+
+    .table-header__title {
         font-style: normal;
         font-weight: 500;
         font-size: 20px;
-        line-height: 28px;        
+        line-height: 28px;
         align-items: center;
         letter-spacing: 0.02em;
     }
@@ -31,7 +31,6 @@
                 &.cross:after {
                     content: "";
                     position: absolute;
-                    // top: 11px;
                     left: 25px;
                     width: 12.9px;
                     height: 1.2px;

@@ -1,29 +1,18 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Formik, Field, Form, FormikHelpers } from 'formik';
-
 import classNames from "classnames";
-
-
 import {Button, Modal} from 'react-bootstrap';
-import UserDeleteModal from 'components/DeleteUserModal';
-
-import HandleDataModal from 'shared/ui/Modal/HandleDataModal'
-// import ConfirmationModal from 'shared/ui/Modal/ConfirmationModal';
-
-import {IColumnsNames} from 'data/initialTableData'
-
-import {getByPlaceholderText} from 'shared/utils'
-
-import validate from 'components/UsersTable/validation/validation'
-
 import "bootstrap/dist/css/bootstrap.min.css";
+import './style.scss';
 
+import UserDeleteModal from 'components/DeleteUserModal';
+import HandleDataModal from 'shared/ui/Modal/HandleDataModal'
+import {IColumnsNames} from 'data/initialTableData'
+import {getByPlaceholderText} from 'shared/utils'
+import validate from 'components/UsersTable/validation/validation'
 import TextInput from 'components/TextInput'
-
 import UserTableRow from 'components/UserTableRow';
 import TableHeader from 'components/TableHeader';
-
-import './style.scss';
 
 import {
     IUserData,
@@ -133,7 +122,7 @@ function UsersTable(props: IUsersTableProps) {
                 </thead>
                     {tableState.tableData && tableState.tableData.map((user, i) => {
                         return (
-                            <tbody>
+                            <tbody key={user.login + i}>
                                 <UserTableRow
                                     user={user}
                                     userIndex={i}
