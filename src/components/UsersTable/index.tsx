@@ -4,7 +4,7 @@ import { Formik, Field, Form, FormikHelpers } from 'formik';
 import classNames from "classnames";
 
 import './style.scss';
-import {Button} from 'react-bootstrap';
+import {Button, Modal} from 'react-bootstrap';
 import UserDeleteModal from 'components/DeleteUserModal';
 
 import HandleDataModal from 'shared/ui/Modal/HandleDataModal'
@@ -188,7 +188,9 @@ function UsersTable(props: IUsersTableProps) {
                                         </div>
                                     )
                                 })}
-                                <Button className={submitButtonClasses} type="submit">{getDataModalLabels().confirmButton}</Button>
+                                <Modal.Footer>     
+                                    <Button className={submitButtonClasses} type="submit">{getDataModalLabels().confirmButton}</Button>
+                                </Modal.Footer>
                             </Form>
                         )}
                     </Formik>

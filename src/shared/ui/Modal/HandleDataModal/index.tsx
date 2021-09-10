@@ -31,12 +31,13 @@ function HandleDataModal(props: IModalWindowProps) {
 			centered
 			onHide={handleClose}
 			backdrop="static"
+			dialogClassName="handle-data-modal"
 		>
 			<Modal.Header closeButton>
 				<Modal.Title>{modalTitle}</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-			    {children}
+			    <div className='modal-children'>{children}</div>
 			</Modal.Body>
 		</Modal>
 	);

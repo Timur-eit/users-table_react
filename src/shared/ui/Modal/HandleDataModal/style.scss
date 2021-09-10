@@ -1,58 +1,119 @@
 @import "shared/styles_modules/colors";
 @import "shared/styles_modules/mixines";
 
-.modal-dialog {
-  margin: 1em;
-  .modal-content {
-    height: 204px;
-    .modal-body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-
-      .modal-title-block {
-        .modal-title {
-          font-weight: bold;
+.handle-data-modal {
+    margin: 0 auto;
+    .modal-content {
+        min-height: 564px;
+        .modal-header {
+            background-color: $header;
+            color: #ffff;
+            height: 56px;
+            position: relative;
+            .modal-title {
+                position: absolute;
+                left: 30%;
+                @include modalTitle;
+            }
+            .btn-close {
+                background: transparent url(../../../img/cross.svg) center/1em auto no-repeat;
+            }
         }
-        .decline-btn {
-          position: absolute;
-          top: 5px;
-          right: 5px;
-          width: 55px;
-          height: 55px;
-          cursor: pointer;
 
-          &.decline-btn:before,
-          &.decline-btn:after {
-            content: "";
-            position: absolute;
-            top: 21px;
-            left: 10px;
-            width: 26px;
-            height: 2px;
-            background: $primary;
-          }
-
-          &.decline-btn:before {
-            transform: rotate(45deg);
-            /* margin-top: 20px; */
-          }
-
-          &.decline-btn:after {
-            transform: rotate(-45deg);
-          }
+        .modal-body {
+            padding: 0;
+            
+            .modal-children {
+                height: 100%;
+                width: 100%;
+                position: relative;
+                .modal-footer {
+                    > * {
+                        margin: 0;
+                    }
+                    border: none;
+                    background-color: $modalFooterBckg;
+                    position: absolute;
+                    width: 100%;
+                    bottom: 0;
+                    height: 60px;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: baseline;
+                    button {
+                        width: 150px;
+                        height: 36px;
+                    }
+                    
+                }
+                
+            }
         }
-      }
 
-      .btn {
-        width: 100%;
-        background-color: $primary;
-        transition-duration: 300ms;
-        &:hover {
-          background-color: $hoverButton;
-        }
-      }
+
+        
     }
-  }
+
+
 }
+
+
+
+
+// .modal-dialog {
+//   margin: 0;
+
+//   .modal-content {
+//     margin: 0 auto;
+//     height: 204px;
+//     .modal-body {
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       justify-content: space-between;
+
+//       .modal-title-block {
+//         .modal-title {
+//           font-weight: bold;
+//         }
+//         .decline-btn {
+//           position: absolute;
+//           top: 5px;
+//           right: 5px;
+//           width: 55px;
+//           height: 55px;
+//           cursor: pointer;
+
+//           &.decline-btn:before,
+//           &.decline-btn:after {
+//             content: "";
+//             position: absolute;
+//             top: 21px;
+//             left: 10px;
+//             width: 26px;
+//             height: 2px;
+//             background: $primary;
+//           }
+
+//           &.decline-btn:before {
+//             transform: rotate(45deg);
+//             /* margin-top: 20px; */
+//           }
+
+//           &.decline-btn:after {
+//             transform: rotate(-45deg);
+//           }
+//         }
+//       }
+
+//       .btn {
+//         width: 100%;
+//         background-color: $primary;
+//         transition-duration: 300ms;
+//         &:hover {
+//           background-color: $hoverButton;
+//         }
+//       }
+//     }
+//   }
+// }
