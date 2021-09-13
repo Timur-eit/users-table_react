@@ -1,15 +1,33 @@
 @import 'shared/styles_modules/colors';
 @import 'shared/styles_modules/mixines';
 
+.confirmation-modal {
+    .modal-body {
+        height: 168px;
+        justify-content: space-around;
+    }
+}
+
+
 .modal-dialog {
-    margin: 0 auto;
+    // margin: 0 auto;
     .modal-content {
-        height: 204px;
+        .modal-header {
+            background-color: $header;
+            color: #ffff;
+            height: 56px;
+            position: relative;
+            .modal-title {
+                position: absolute;
+                left: 30%;
+                @include modalTitle;
+            }
+        }
+        
         .modal-body {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
+            align-items: center;            
             .modal-title-block {
                 .modal-title {
                     font-weight: bold;

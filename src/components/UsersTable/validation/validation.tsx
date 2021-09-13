@@ -13,7 +13,7 @@ function validate(values: any, unblockSubmit?: (state: boolean) => void): IError
         error.firstName = errorMessages.firstName.required;
     }
     if (!values.midleName) {
-        error.firstName = errorMessages.firstName.required;
+        error.midleName = errorMessages.midleName.required;
     }
     if (!values.email) {
         error.email = errorMessages.email.required;
